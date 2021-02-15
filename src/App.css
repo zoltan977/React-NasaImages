@@ -11,19 +11,22 @@
   align-items: center;
 }
 
+.App header {
+  font-size: 2vw;
+}
+.App header a {
+  text-decoration: none;
+  color: black;
+}
+
 .App input {
-  /* position: fixed;
-  top: 0;
-  right: 0; */
-
-  /* transform: translateX(-50%); */
-
   text-align: center;
   margin: 1em;
   padding-right: 0.5em;
   font-weight: bold;
   font-size: 5vw;
-  box-shadow: 0.15vw 0.15vw 0.38vw rgba(0, 0, 0, 0.5);
+  box-shadow: 0.3vw 0.3vw 0.75vw black;
+  outline: none;
 }
 
 .App .imageWithDescription iframe {
@@ -44,10 +47,12 @@
   font-size: 3vw;
 }
 
+.App .imageWithDescription .image p {
+  font-size: 3vw;
+}
+
 .App .imageWithDescription {
   width: 70vw;
-
-  /* margin-left: 10vw; */
 
   border: 5px solid green;
 }
