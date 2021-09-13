@@ -78,10 +78,10 @@ export default function Home() {
   };
 
   const prev = (e) => {
-    setDate((prev) =>
-      new Date(prev).toString() === "Invalid Date"
+    setDate((prevDate) =>
+      new Date(prevDate).toString() === "Invalid Date"
         ? new Date().toISOString().slice(0, 10)
-        : new Date(new Date(prev).getTime() - 1 * 24 * 60 * 60 * 1000)
+        : new Date(new Date(prevDate).getTime() - 1 * 24 * 60 * 60 * 1000)
             .toISOString()
             .slice(0, 10)
     );
@@ -90,10 +90,10 @@ export default function Home() {
   };
 
   const next = (e) => {
-    setDate((prev) =>
-      new Date(prev).toString() === "Invalid Date"
+    setDate((prevDate) =>
+      new Date(prevDate).toString() === "Invalid Date"
         ? new Date().toISOString().slice(0, 10)
-        : new Date(new Date(prev).getTime() + 1 * 24 * 60 * 60 * 1000)
+        : new Date(new Date(prevDate).getTime() + 1 * 24 * 60 * 60 * 1000)
             .toISOString()
             .slice(0, 10)
     );

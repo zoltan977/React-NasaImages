@@ -1,75 +1,58 @@
 import React, { useState, useEffect } from "react";
 import "./gallery.css";
+import Item from "./item/item";
+import Popup from "./popup/popup";
 
 export default function Gallery() {
-  const [stateImages, setStateImages] = useState([]);
-  const [stateImagesData, setStateImagesData] = useState([]);
-  const [popup, setPopup] = useState(null);
-
-  const onClick = (idx) => {
-    const close = (e) => {
-      setPopup(null);
-    };
-
-    setPopup(
-      <div className="popup">
-        <span className="close" onClick={close}>
-          X
-        </span>
-        <h2>{stateImagesData[idx].title}</h2>
-        {stateImages[idx]}
-        <p>{stateImagesData[idx].explanation}</p>
-      </div>
-    );
-  };
+  const [data, setData] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
-    let images = [];
-    let imagesData = [];
+    if (selectedImage) setShowPopup(true);
+  }, [selectedImage]);
 
-    fetch(
-      `https://api.nasa.gov/planetary/apod?count=9&api_key=JZLWuJDR9crbBSjYEFfoziVpdkNQq6FNywPhfzdT`
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        //console.log(json)
+  useEffect(() => {
+    if (!showPopup) {
+      setTimeout(() => {
+        setSelectedImage(null);
+      }, 1000);
+    }
+  }, [showPopup]);
 
-        for (const imageData of json) {
-          if (
-            imageData.hasOwnProperty("media_type") &&
-            imageData.media_type === "video"
-          )
-            images.push(
-              <iframe src={`${imageData.url}?autoplay=1&mute=1`}></iframe>
-            );
-          else images.push(<img src={`${imageData.url}`} />);
+  useEffect(() => {
+    const asyncFn = async () => {
+      const response = await fetch(
+        `https://api.nasa.gov/planetary/apod?count=9&api_key=JZLWuJDR9crbBSjYEFfoziVpdkNQq6FNywPhfzdT`
+      );
 
-          imagesData.push(imageData);
-        }
-        console.log(images);
-        console.log(imagesData);
+      const json = await response.json();
 
-        setStateImages(images);
-        setStateImagesData(imagesData);
-      });
+      setData(json);
+    };
+
+    asyncFn();
   }, []);
 
   return (
-    <div className="gallery" style={{
-      backgroundImage: 'url("bkg2.jpg")',
-      backgroundSize: "cover",
-    }}>
-      {popup}
-      {stateImages.map((img, idx) => (
-        <div
+    <div
+      className="Gallery"
+      style={{
+        backgroundImage: 'url("bkg2.jpg")',
+        backgroundSize: "cover",
+      }}
+    >
+      <Popup
+        selectedImage={selectedImage}
+        showPopup={showPopup}
+        setShowPopup={setShowPopup}
+      />
+      {data.map((imgData, idx) => (
+        <Item
           key={idx}
-          className="imageDiv"
-          onClick={(e) => {
-            onClick(idx);
-          }}
-        >
-          {img}
-        </div>
+          imageData={imgData}
+          setSelectedImage={setSelectedImage}
+        />
       ))}
     </div>
   );
