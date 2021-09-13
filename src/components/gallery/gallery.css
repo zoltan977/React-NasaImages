@@ -1,4 +1,7 @@
 .gallery {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 20vw 20vw 20vw;
@@ -8,10 +11,7 @@
       -ms-flex-pack: center;
           justify-content: center;
   width: 100%;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  border: 5px solid green;
+  padding: 5vw 0;
 }
 
 .gallery .popup {
@@ -83,7 +83,8 @@
 .gallery .imageDiv {
   width: 100%;
   height: 100%;
-  border: 3px solid blue;
+  -webkit-box-shadow: 0 1vw 2.5vw black;
+          box-shadow: 0 1vw 2.5vw black;
 }
 
 .gallery .imageDiv img,

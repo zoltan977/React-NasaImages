@@ -1,7 +1,9 @@
 .Home {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   text-align: center;
   width: 100%;
-  min-height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -15,8 +17,32 @@
   padding-bottom: 5vw;
 }
 
-.Home input,
-.Home button {
+.Home .dashboard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.Home .dashboard div {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.Home .dashboard div button,
+.Home .dashboard div input {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.Home .dashboard input,
+.Home .dashboard button {
   text-align: center;
   margin: 1em;
   padding: 0 0.25em;
@@ -30,8 +56,8 @@
   background-image: linear-gradient(to bottom, grey, white);
 }
 
-.Home input:hover,
-.Home button:hover {
+.Home .dashboard input:hover,
+.Home .dashboard button:hover {
   background-image: -webkit-gradient(linear, left bottom, left top, from(grey), to(white));
   background-image: linear-gradient(to top, grey, white);
 }
@@ -47,6 +73,11 @@
   width: 70vw;
   -webkit-box-shadow: 0 1vw 2.5vw black;
           box-shadow: 0 1vw 2.5vw black;
+  background-color: white;
+}
+
+.Home .imageWithDescription.hide {
+  visibility: hidden;
 }
 
 .Home .imageWithDescription iframe {
@@ -91,7 +122,7 @@
   overflow: auto;
   color: white;
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.75);
 }
 
 .Home .imageWithDescription .description.show {
