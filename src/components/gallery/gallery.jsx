@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './gallery.css';
 
-export default function Gallery(props) {
+export default function Gallery() {
 
     const [stateImages, setStateImages] = useState([]);
     const [stateImagesData, setStateImagesData] = useState([]);

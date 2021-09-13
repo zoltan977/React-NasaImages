@@ -1,0 +1,16 @@
+Header {
+  text-align: center;
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  font-size: 5vw;
+}
+
+Header a {
+  text-decoration: none;
+  color: black;
+  padding: 0 0.5em;
+}
+
+Header a:hover {
+  background-image: -webkit-gradient(linear, left bottom, left top, from(grey), to(white));
+  background-image: linear-gradient(to top, grey, white);
+}

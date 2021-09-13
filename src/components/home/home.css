@@ -1,0 +1,108 @@
+.Home {
+  text-align: center;
+  width: 100%;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-bottom: 5vw;
+}
+
+.Home input,
+.Home button {
+  text-align: center;
+  margin: 1em;
+  padding: 0 0.25em;
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  font-weight: bold;
+  font-size: 5vw;
+  -webkit-box-shadow: 0 1vw 2.5vw black;
+          box-shadow: 0 1vw 2.5vw black;
+  outline: none;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(grey), to(white));
+  background-image: linear-gradient(to bottom, grey, white);
+}
+
+.Home input:hover,
+.Home button:hover {
+  background-image: -webkit-gradient(linear, left bottom, left top, from(grey), to(white));
+  background-image: linear-gradient(to top, grey, white);
+}
+
+.Home .imageWithDescription {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 70vw;
+  -webkit-box-shadow: 0 1vw 2.5vw black;
+          box-shadow: 0 1vw 2.5vw black;
+}
+
+.Home .imageWithDescription iframe {
+  width: 100%;
+  height: 40vw;
+}
+
+.Home .imageWithDescription img {
+  width: 100%;
+  height: auto;
+}
+
+.Home .imageWithDescription h2 {
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  font-size: 5vw;
+  cursor: pointer;
+  padding: 1vw 0;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(grey), to(white));
+  background-image: linear-gradient(to bottom, grey, white);
+}
+
+.Home .imageWithDescription h2:hover {
+  background-image: -webkit-gradient(linear, left bottom, left top, from(grey), to(white));
+  background-image: linear-gradient(to top, grey, white);
+}
+
+.Home .imageWithDescription .description {
+  padding: 1vw 0;
+  font-size: 3vw;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
+  transition: transform 1s;
+  transition: transform 1s, -webkit-transform 1s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-height: 100%;
+  overflow: auto;
+  color: white;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.Home .imageWithDescription .description.show {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.Home .imageWithDescription .image {
+  position: relative;
+}
+
+.Home .imageWithDescription .image p {
+  font-size: 3vw;
+}
