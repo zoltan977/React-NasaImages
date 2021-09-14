@@ -1,0 +1,16 @@
+.Item {
+  width: 100%;
+  height: 100%;
+
+  // border: 3px solid blue;
+  box-shadow: 0 1vw 2.5vw black;
+
+  img,
+  iframe {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    pointer-events: none;
+  }
+}
