@@ -14,7 +14,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding-bottom: 5vw;
+  padding-bottom: 2.5vw;
 }
 
 .Home .dashboard {
@@ -48,7 +48,7 @@
   padding: 0 0.25em;
   font-family: "Yanone Kaffeesatz", sans-serif;
   font-weight: bold;
-  font-size: 5vw;
+  font-size: 2.5vw;
   -webkit-box-shadow: 0 1vw 2.5vw black;
           box-shadow: 0 1vw 2.5vw black;
   outline: none;
@@ -62,7 +62,23 @@
   background-image: linear-gradient(to top, grey, white);
 }
 
+.Home .content {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.Home .content span {
+  font-size: 10vw;
+  cursor: pointer;
+}
+
 .Home .imageWithDescription {
+  margin: 0 auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -92,7 +108,7 @@
 
 .Home .imageWithDescription h2 {
   font-family: "Yanone Kaffeesatz", sans-serif;
-  font-size: 5vw;
+  font-size: 2.5vw;
   cursor: pointer;
   padding: 1vw 0;
   background-image: -webkit-gradient(linear, left top, left bottom, from(grey), to(white));
@@ -106,7 +122,7 @@
 
 .Home .imageWithDescription .description {
   padding: 1vw 0;
-  font-size: 3vw;
+  font-size: 1.5vw;
   font-family: Arial, Helvetica, sans-serif;
   -webkit-transform: scale(0);
           transform: scale(0);

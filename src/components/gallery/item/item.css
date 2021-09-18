@@ -3,6 +3,7 @@
   height: 100%;
   -webkit-box-shadow: 0 1vw 2.5vw black;
           box-shadow: 0 1vw 2.5vw black;
+  cursor: pointer;
 }
 
 .Item img,

@@ -78,6 +78,9 @@ export default function Home() {
   };
 
   const prev = (e) => {
+    if (imageWithDescriptionClass.includes("hide"))
+      return;
+
     setDate((prevDate) =>
       new Date(prevDate).toString() === "Invalid Date"
         ? new Date().toISOString().slice(0, 10)
@@ -90,6 +93,9 @@ export default function Home() {
   };
 
   const next = (e) => {
+    if (imageWithDescriptionClass.includes("hide"))
+      return;
+
     setDate((prevDate) =>
       new Date(prevDate).toString() === "Invalid Date"
         ? new Date().toISOString().slice(0, 10)
@@ -158,22 +164,26 @@ export default function Home() {
           +
         </button>
       </div>
-      <div className={imageWithDescriptionClass} ref={contentRef}>
-        {title && (
-          <h2
-            onClick={(e) =>
-              descriptionClass.includes("show")
-                ? setDescriptionClass("description")
-                : setDescriptionClass("description show")
-            }
-          >
-            {title}
-          </h2>
-        )}
-        <div className="image">
-          {content}
-          {description && <div className={descriptionClass}>{description}</div>}
+      <div className="content">
+        <span onClick={prev}>{"\u21e6"}</span>
+        <div className={imageWithDescriptionClass} ref={contentRef}>
+          {title && (
+            <h2
+              onClick={(e) =>
+                descriptionClass.includes("show")
+                  ? setDescriptionClass("description")
+                  : setDescriptionClass("description show")
+              }
+            >
+              {title}
+            </h2>
+          )}
+          <div className="image">
+            {content}
+            {description && <div className={descriptionClass}>{description}</div>}
+          </div>
         </div>
+        <span onClick={next}>{"\u21e8"}</span>
       </div>
     </div>
   );
