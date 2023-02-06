@@ -11,18 +11,18 @@ export default function Home() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [showDescription, setShowDescription] = useState(false);
-  const [nextContent, setNextContent] = useState(null);
-  
-  const [currentContent, setCurrentContent] = useState(null);
+  const [content, setContent] = useState(null);
+
   const [showContent, setShowContent] = useState(true);
   const [shiftLeft, setShiftLeft] = useState(true);
-  const [isContentOut, setIsContentOut] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const contentRef = useRef();
 
   const callAPI = async () => {
+    if (isAnimating) return;
+
     setShowContent(false);
-    setNextContent(null);
 
     let response;
     let json;
@@ -36,7 +36,7 @@ export default function Home() {
     } catch (error) {
       setTitle("");
       setDescription("");
-      setNextContent(<p>Valami hiba történt</p>);
+      setContent(<p>Valami hiba történt</p>);
 
       return Promise.reject(response);
     }
@@ -44,20 +44,22 @@ export default function Home() {
     if ((json.code && json.msg) || (json.error && json.error.message)) {
       setTitle("");
       setDescription("");
-      setNextContent(<p>{json.msg || json.error.message}</p>);
+      setContent(<p>{json.msg || json.error.message}</p>);
     } else {
       setTitle(json.title);
       setDescription(json.explanation);
 
       if (json.media_type && json.media_type === "video")
-        setNextContent(
+        setContent(
           <iframe
             title={json.title}
             src={`${json.url}?autoplay=1&mute=1`}
           ></iframe>
         );
-      else setNextContent(<img alt="" src={`${json.url}`} />);
+      else setContent(<img alt="" src={`${json.url}`} />);
     }
+
+    setShowContent(true);
   };
 
   const checkDate = (value) => {
@@ -71,6 +73,8 @@ export default function Home() {
   };
 
   const increaseDecreaseDate = (increase = false) => {
+    if (isAnimating) return;
+
     const lengthOfOneDayInMiliseconds = 24 * 60 * 60 * 1000;
     const value = increase
       ? lengthOfOneDayInMiliseconds
@@ -81,14 +85,6 @@ export default function Home() {
       return checkDate(nextDateTimeStamp);
     });
   };
-
-  useEffect(() => {
-    if (isContentOut && nextContent) {
-      setCurrentContent(nextContent);
-      setNextContent(null);
-      setShowContent(true);
-    }
-  }, [isContentOut, nextContent]);
 
   useEffect(() => {
     callAPI();
@@ -103,16 +99,26 @@ export default function Home() {
       }}
     >
       <div className={styles.dashboard}>
-        <button onClick={() => increaseDecreaseDate()}>-</button>
+        <button onClick={() => increaseDecreaseDate()} disabled={isAnimating}>
+          -
+        </button>
         <div>
           <input
+            disabled={isAnimating}
             type="date"
             value={date}
-            onChange={(e) => setDate(checkDate(e.target.value))}
+            onChange={(e) => !isAnimating && setDate(checkDate(e.target.value))}
           />
-          <button onClick={() => callAPI()}>Set</button>
+          <button onClick={() => callAPI()} disabled={isAnimating}>
+            Set
+          </button>
         </div>
-        <button onClick={() => increaseDecreaseDate(true)}>+</button>
+        <button
+          onClick={() => increaseDecreaseDate(true)}
+          disabled={isAnimating}
+        >
+          +
+        </button>
       </div>
       <div className={styles.content}>
         <span onClick={() => increaseDecreaseDate()}>{"\u21e6"}</span>
@@ -131,8 +137,8 @@ export default function Home() {
               shiftLeft ? "OutLeft" : "OutRight"
             }`,
           }}
-          onExited={() => setIsContentOut(true)}
-          onEntered={() => setIsContentOut(false)}
+          onExit={() => setIsAnimating(true)}
+          onEntered={() => setIsAnimating(false)}
         >
           <div className={styles.imageWithDescription} ref={contentRef}>
             {title && (
@@ -141,7 +147,7 @@ export default function Home() {
               </h2>
             )}
             <div className={styles.image}>
-              {currentContent}
+              {content}
               {description && (
                 <div
                   className={classnames(styles.description, {
