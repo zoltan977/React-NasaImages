@@ -4,6 +4,7 @@ import classnames from "classnames";
 import env from "react-dotenv";
 import React, { useState, useEffect, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
+import httpClient from './../../shared/httpClient'
 
 export default function Home() {
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
@@ -27,18 +28,18 @@ export default function Home() {
     let response;
     let json;
     try {
-      response = await fetch(
-        `https://api.nasa.gov/planetary/apod?date=${date}&api_key=${env.API_KEY}`
+      response = await httpClient.get(
+        `?date=${date}&api_key=${env.API_KEY}`
       );
       console.log("response: ", response);
-      json = await response.json();
+      json = response.data;
       console.log("json: ", json);
     } catch (error) {
       setTitle("");
       setDescription("");
-      setContent(<p>Valami hiba történt</p>);
+      setContent(<p>{error.msg || error.message || 'Valami hiba történt'}</p>);
 
-      return Promise.reject(response);
+      return;
     }
 
     if ((json.code && json.msg) || (json.error && json.error.message)) {
