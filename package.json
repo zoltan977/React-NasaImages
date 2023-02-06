@@ -44,7 +44,9 @@
     ]
   },
   "react-dotenv": {
-    "whitelist": ["API_KEY"]
+    "whitelist": [
+      "API_KEY"
+    ]
   },
   "devDependencies": {
     "prettier": "^2.4.0"

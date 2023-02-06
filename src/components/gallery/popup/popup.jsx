@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./popup.css";
 
 export default function Popup({ selectedImage, showPopup, setShowPopup }) {
-
   const [showExplanation, setShowExplanation] = useState(false);
 
   return (

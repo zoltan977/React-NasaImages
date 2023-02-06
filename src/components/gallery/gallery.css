@@ -1,16 +1,16 @@
 .Gallery {
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   position: relative;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 20vw 20vw 20vw;
-      grid-template-columns: 20vw 20vw 20vw;
+  grid-template-columns: 20vw 20vw 20vw;
   gap: 2vw;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   width: 100%;
   padding: 5vw 0;
 }

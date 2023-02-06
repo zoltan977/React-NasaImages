@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./gallery.css";
 import Item from "./item/item";
 import Popup from "./popup/popup";
-import LoadingMask from './../LoadingMask/LoadingMask.component';
+import LoadingMask from "./../LoadingMask/LoadingMask.component";
 
 export default function Gallery() {
   const [data, setData] = useState([]);
@@ -46,10 +46,7 @@ export default function Gallery() {
         backgroundSize: "cover",
       }}
     >
-      {
-        loading &&
-        <LoadingMask/>
-      }
+      {loading && <LoadingMask />}
       <Popup
         selectedImage={selectedImage}
         showPopup={showPopup}

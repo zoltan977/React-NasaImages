@@ -11,7 +11,14 @@
   padding: 0 0.5em;
 }
 
-.Header a:hover, .Header a.active {
-  background-image: -webkit-gradient(linear, left bottom, left top, from(grey), to(white));
+.Header a:hover,
+.Header a.active {
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    from(grey),
+    to(white)
+  );
   background-image: linear-gradient(to top, grey, white);
 }
