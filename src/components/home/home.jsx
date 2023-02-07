@@ -2,8 +2,7 @@ import "animate.css/animate.min.css";
 import styles from "./home.module.scss";
 import classnames from "classnames";
 import env from "react-dotenv";
-import React, { useState, useEffect, useRef } from "react";
-import { CSSTransition } from "react-transition-group";
+import React, { useState, useEffect } from "react";
 import httpClient from "./../../shared/httpClient";
 
 export default function Home() {
@@ -12,18 +11,22 @@ export default function Home() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [showDescription, setShowDescription] = useState(false);
+
   const [content, setContent] = useState(null);
+  const [animationState, setAnimationState] = useState("");
+  const [animateLeft, setAnimateLeft] = useState(true);
 
-  const [showContent, setShowContent] = useState(true);
-  const [shiftLeft, setShiftLeft] = useState(true);
-  const [isAnimating, setIsAnimating] = useState(false);
-
-  const contentRef = useRef();
+  const onAnimationEnd = (e) => {
+    if (e.animationName.includes("Out")) {
+      setAnimationState("flyIn");
+    } else {
+      setAnimationState("");
+    }
+  };
 
   const callAPI = async () => {
-    if (isAnimating) return;
-
-    setShowContent(false);
+    if (animationState) return;
+    setAnimationState("flyOut");
 
     let json;
     try {
@@ -44,7 +47,6 @@ export default function Home() {
             "Valami hiba történt"}
         </p>
       );
-      setShowContent(true);
       return;
     }
 
@@ -59,14 +61,12 @@ export default function Home() {
         ></iframe>
       );
     else setContent(<img alt="" src={`${json.url}`} />);
-
-    setShowContent(true);
   };
 
   const checkDate = (value) => {
     const dateToSet = new Date(value);
     const currentDate = new Date(date);
-    setShiftLeft(dateToSet < currentDate ? true : false);
+    setAnimateLeft(dateToSet < currentDate ? true : false);
 
     return dateToSet.toString() === "Invalid Date"
       ? new Date().toISOString().slice(0, 10)
@@ -74,7 +74,7 @@ export default function Home() {
   };
 
   const increaseDecreaseDate = (increase = false) => {
-    if (isAnimating) return;
+    if (animationState) return;
 
     const lengthOfOneDayInMiliseconds = 24 * 60 * 60 * 1000;
     const value = increase
@@ -100,67 +100,59 @@ export default function Home() {
       }}
     >
       <div className={styles.dashboard}>
-        <button onClick={() => increaseDecreaseDate()} disabled={isAnimating}>
+        <button
+          onClick={() => increaseDecreaseDate()}
+          disabled={animationState}
+        >
           -
         </button>
         <div>
           <input
-            disabled={isAnimating}
+            disabled={animationState}
             type="date"
             value={date}
-            onChange={(e) => !isAnimating && setDate(checkDate(e.target.value))}
+            onChange={(e) => setDate(checkDate(e.target.value))}
           />
-          <button onClick={() => callAPI()} disabled={isAnimating}>
+          <button onClick={() => callAPI()} disabled={animationState}>
             Set
           </button>
         </div>
         <button
           onClick={() => increaseDecreaseDate(true)}
-          disabled={isAnimating}
+          disabled={animationState}
         >
           +
         </button>
       </div>
       <div className={styles.content}>
         <span onClick={() => increaseDecreaseDate()}>{"\u21e6"}</span>
-        <CSSTransition
-          in={showContent}
-          timeout={500}
-          nodeRef={contentRef}
-          classNames={{
-            enter: `animate__animated animate__bounce${
-              shiftLeft ? "InRight" : "InLeft"
-            }`,
-            enterDone: `animate__animated animate__bounce${
-              shiftLeft ? "InRight" : "InLeft"
-            }`,
-            exit: `animate__animated animate__bounce${
-              shiftLeft ? "OutLeft" : "OutRight"
-            }`,
-          }}
-          onExit={() => setIsAnimating(true)}
-          onEntered={() => setIsAnimating(false)}
+        <div
+          className={classnames(styles.imageWithDescription, {
+            ["animate__animated"]: animationState,
+            ["animate__faster"]: animationState,
+            [`animate__bounce${animateLeft ? "InRight" : "InLeft"}`]:
+              animationState === "flyIn",
+            [`animate__bounce${animateLeft ? "OutLeft" : "OutRight"}`]:
+              animationState === "flyOut",
+          })}
+          onAnimationEnd={onAnimationEnd}
         >
-          <div className={styles.imageWithDescription} ref={contentRef}>
-            {title && (
-              <h2 onClick={() => setShowDescription((prev) => !prev)}>
-                {title}
-              </h2>
+          {title && (
+            <h2 onClick={() => setShowDescription((prev) => !prev)}>{title}</h2>
+          )}
+          <div className={styles.image}>
+            {content}
+            {description && (
+              <div
+                className={classnames(styles.description, {
+                  [styles.show]: showDescription,
+                })}
+              >
+                {description}
+              </div>
             )}
-            <div className={styles.image}>
-              {content}
-              {description && (
-                <div
-                  className={classnames(styles.description, {
-                    [styles.show]: showDescription,
-                  })}
-                >
-                  {description}
-                </div>
-              )}
-            </div>
           </div>
-        </CSSTransition>
+        </div>
         <span onClick={() => increaseDecreaseDate(true)}>{"\u21e8"}</span>
       </div>
     </div>
