@@ -4,15 +4,10 @@ import classnames from "classnames";
 import env from "react-dotenv";
 import React, { useState, useEffect } from "react";
 import httpClient from "./../../shared/httpClient";
-import Content from "../shared/content/content";
+import ContentCard from "../shared/content-card/content-card";
 
 export default function Home() {
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
-
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [showDescription, setShowDescription] = useState(false);
-
   const [content, setContent] = useState(null);
   const [animationState, setAnimationState] = useState("");
   const [animateLeft, setAnimateLeft] = useState(true);
@@ -34,26 +29,25 @@ export default function Home() {
       const response = await httpClient.get(
         `?date=${date}&api_key=${env.API_KEY}`
       );
+
       console.log("response: ", response);
       json = response.data;
     } catch (error) {
       console.log("error: ", error);
-      setTitle("");
-      setDescription("");
-      setContent(
-        <p>
-          {error.response?.data?.msg ||
-            error.response?.data?.error?.message ||
-            error.message ||
-            "Valami hiba történt"}
-        </p>
-      );
+
+      setContent({
+        title: "",
+        url: "",
+        explanation:
+          error.response?.data?.msg ||
+          error.response?.data?.error?.message ||
+          error.message ||
+          "Valami hiba történt",
+      });
       return;
     }
 
-    setTitle(json.title);
-    setDescription(json.explanation);
-    setContent(<Content data={json}></Content>);
+    setContent(json);
   };
 
   const checkDate = (value) => {
@@ -120,7 +114,7 @@ export default function Home() {
       <div className={styles.content}>
         <span onClick={() => increaseDecreaseDate()}>{"\u21e6"}</span>
         <div
-          className={classnames(styles.imageWithDescription, {
+          className={classnames(styles.cardContainer, {
             ["animate__animated"]: animationState,
             ["animate__faster"]: animationState,
             [`animate__bounce${animateLeft ? "InRight" : "InLeft"}`]:
@@ -130,21 +124,7 @@ export default function Home() {
           })}
           onAnimationEnd={onAnimationEnd}
         >
-          {title && (
-            <h2 onClick={() => setShowDescription((prev) => !prev)}>{title}</h2>
-          )}
-          <div className={styles.image}>
-            {content}
-            {description && (
-              <div
-                className={classnames(styles.description, {
-                  [styles.show]: showDescription,
-                })}
-              >
-                {description}
-              </div>
-            )}
-          </div>
+          <ContentCard data={content}></ContentCard>
         </div>
         <span onClick={() => increaseDecreaseDate(true)}>{"\u21e8"}</span>
       </div>

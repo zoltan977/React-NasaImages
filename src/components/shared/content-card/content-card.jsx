@@ -12,7 +12,7 @@ export default function ContentCard({ data }) {
       setShowExplanation("");
     }
   };
-  
+
   const showHide = (prev) => {
     if (prev === "") {
       return "show";
@@ -23,7 +23,7 @@ export default function ContentCard({ data }) {
     }
   };
 
-  return (
+  return data?.title && data?.url ? (
     <div className={styles.ContentCard}>
       <h2 onClick={(e) => setShowExplanation((prev) => showHide(prev))}>
         {data?.title}
@@ -41,5 +41,7 @@ export default function ContentCard({ data }) {
         </p>
       </div>
     </div>
+  ) : (
+    <p>{data?.explanation}</p>
   );
 }
