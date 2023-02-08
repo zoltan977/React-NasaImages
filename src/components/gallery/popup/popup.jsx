@@ -1,5 +1,5 @@
 import styles from "./popup.module.scss";
-import React, { useState } from "react";
+import React from "react";
 import classnames from "classnames";
 import ContentCard from "../../shared/content-card/content-card";
 
