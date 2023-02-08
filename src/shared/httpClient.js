@@ -1,5 +1,5 @@
 import axios from 'axios';
-import errorResponseHandler from './errorHandler';
+import errorResponseHandler from './errorResponseHandler';
 import env from "react-dotenv";
 
 const httpClient = axios.create({

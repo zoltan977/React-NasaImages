@@ -1,17 +1,11 @@
 import React from "react";
-import "./item.css";
+import Content from "../../shared/content/content";
+import styles from "./item.module.scss";
 
 export default function Item({ imageData, setSelectedImage }) {
   return (
-    <div className="Item" onClick={(e) => setSelectedImage(imageData)}>
-      {imageData.media_type && imageData.media_type === "video" ? (
-        <iframe
-          title={imageData.title}
-          src={`${imageData.url}?autoplay=1&mute=1`}
-        ></iframe>
-      ) : (
-        <img alt="" src={`${imageData.url}`} />
-      )}
+    <div className={styles.Item} onClick={(e) => setSelectedImage(imageData)}>
+      <Content data={imageData}></Content>
     </div>
   );
 }

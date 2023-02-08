@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import "./gallery.css";
+import styles from "./gallery.module.scss";
 import Item from "./item/item";
 import Popup from "./popup/popup";
-import LoadingMask from "./../LoadingMask/LoadingMask.component";
+import LoadingMask from "../shared/loadingMask/loadingMask.component";
+import httpClient from "../../shared/httpClient";
+import env from "react-dotenv";
 
 export default function Gallery() {
   const [data, setData] = useState([]);
@@ -10,26 +12,20 @@ export default function Gallery() {
   const [showPopup, setShowPopup] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const onPopupClosed = () => {
+    setSelectedImage(null);
+  };
+
   useEffect(() => {
     if (selectedImage) setShowPopup(true);
   }, [selectedImage]);
 
   useEffect(() => {
-    if (!showPopup) {
-      setTimeout(() => {
-        setSelectedImage(null);
-      }, 1000);
-    }
-  }, [showPopup]);
-
-  useEffect(() => {
     const asyncFn = async () => {
       setLoading(true);
-      const response = await fetch(
-        `https://api.nasa.gov/planetary/apod?count=9&api_key=JZLWuJDR9crbBSjYEFfoziVpdkNQq6FNywPhfzdT`
-      );
+      const response = await httpClient(`?count=9&api_key=${env.API_KEY}`);
 
-      const json = await response.json();
+      const json = response.data;
       setLoading(false);
 
       setData(json);
@@ -40,7 +36,7 @@ export default function Gallery() {
 
   return (
     <div
-      className="Gallery"
+      className={styles.Gallery}
       style={{
         backgroundImage: 'url("bkg2.jpg")',
         backgroundSize: "cover",
@@ -51,6 +47,7 @@ export default function Gallery() {
         selectedImage={selectedImage}
         showPopup={showPopup}
         setShowPopup={setShowPopup}
+        onPopupClosed={onPopupClosed}
       />
       {data.map((imgData, idx) => (
         <Item

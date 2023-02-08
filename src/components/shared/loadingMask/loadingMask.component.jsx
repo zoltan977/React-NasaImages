@@ -1,9 +1,9 @@
 import React from "react";
-import "./LoadingMask.css";
+import styles from "./loadingMask.module.scss";
 
 export default function LoadingMask() {
   return (
-    <div className="LoadingMask">
+    <div className={styles.LoadingMask}>
       <img src="loading.gif" alt="" />
     </div>
   );

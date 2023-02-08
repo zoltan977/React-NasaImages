@@ -4,6 +4,7 @@ import classnames from "classnames";
 import env from "react-dotenv";
 import React, { useState, useEffect } from "react";
 import httpClient from "./../../shared/httpClient";
+import Content from "../shared/content/content";
 
 export default function Home() {
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
@@ -52,15 +53,7 @@ export default function Home() {
 
     setTitle(json.title);
     setDescription(json.explanation);
-
-    if (json.media_type && json.media_type === "video")
-      setContent(
-        <iframe
-          title={json.title}
-          src={`${json.url}?autoplay=1&mute=1`}
-        ></iframe>
-      );
-    else setContent(<img alt="" src={`${json.url}`} />);
+    setContent(<Content data={json}></Content>);
   };
 
   const checkDate = (value) => {

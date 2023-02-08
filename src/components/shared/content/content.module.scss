@@ -1,17 +1,16 @@
-.Item {
-  width: 100%;
+.Content {
   height: 100%;
-
-  box-shadow: 0 1vw 2.5vw black;
-
-  cursor: pointer;
 
   img,
   iframe {
     width: 100%;
     height: 100%;
     object-fit: cover;
-
+  }
+  iframe {
+    &.isClickable {
+      pointer-events: all;
+    }
     pointer-events: none;
   }
 }
