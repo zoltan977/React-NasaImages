@@ -1,4 +1,4 @@
-import "./App.css";
+import styles from "./App.module.scss";
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -6,16 +6,16 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import Home from "./components/home/home";
-import Gallery from "./components/gallery/gallery.jsx";
-import ErrorBoundary from "./components/errors/errorBoundary/errorBoundary";
-import Navbar from "./components/navbar/navbar";
+import Home from "./components/home/home.component";
+import Gallery from "./components/gallery/gallery.component.jsx";
+import ErrorBoundary from "./components/errors/errorBoundary/errorBoundary.component";
+import Navbar from "./components/navbar/navbar.component";
 
 function App() {
   return (
     <ErrorBoundary>
       <Router>
-        <div className="App">
+        <div className={styles.App}>
           <Navbar></Navbar>
           <Switch>
             <Route path="/gallery" component={Gallery} />

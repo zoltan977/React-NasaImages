@@ -1,7 +1,7 @@
 import styles from "./popup.module.scss";
 import React from "react";
 import classnames from "classnames";
-import ContentCard from "../../shared/content-card/content-card";
+import ContentCard from "../../shared/content-card/content-card.component";
 
 export default function Popup({
   selectedImage,

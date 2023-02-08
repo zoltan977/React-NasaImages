@@ -1,7 +1,7 @@
 import styles from "./content-card.module.scss";
 import classnames from "classnames";
 import React, { useState } from "react";
-import Content from "../content/content";
+import Content from "../content/content.component";
 
 export default function ContentCard({ data }) {
   const [showExplanation, setShowExplanation] = useState("");

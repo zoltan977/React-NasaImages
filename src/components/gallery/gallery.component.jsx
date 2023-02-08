@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styles from "./gallery.module.scss";
-import Item from "./item/item";
-import Popup from "./popup/popup";
+import Item from "./item/item.component";
+import Popup from "./popup/popup.component";
 import LoadingMask from "../shared/loadingMask/loadingMask.component";
-import httpClient from "../../shared/httpClient";
+import httpClient from "../../utils/httpClient";
 import env from "react-dotenv";
 
 export default function Gallery() {
@@ -22,11 +22,17 @@ export default function Gallery() {
 
   useEffect(() => {
     const asyncFn = async () => {
-      setLoading(true);
-      const response = await httpClient(`?count=9&api_key=${env.API_KEY}`);
+      let json;
+      try {
+        setLoading(true);
+        const response = await httpClient(`?count=9&api_key=${env.API_KEY}`);
 
-      const json = response.data;
-      setLoading(false);
+        json = response.data;
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        return;
+      }
 
       setData(json);
     };

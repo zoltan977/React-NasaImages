@@ -3,8 +3,8 @@ import styles from "./home.module.scss";
 import classnames from "classnames";
 import env from "react-dotenv";
 import React, { useState, useEffect } from "react";
-import httpClient from "./../../shared/httpClient";
-import ContentCard from "../shared/content-card/content-card";
+import httpClient from "../../utils/httpClient";
+import ContentCard from "../shared/content-card/content-card.component";
 
 export default function Home() {
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
