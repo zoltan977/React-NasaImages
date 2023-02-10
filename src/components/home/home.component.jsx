@@ -5,6 +5,7 @@ import env from "react-dotenv";
 import React, { useState, useEffect } from "react";
 import httpClient from "../../utils/httpClient";
 import ContentCard from "../shared/content-card/content-card.component";
+import getAPImessage from "../../utils/getAPImessage";
 
 export default function Home() {
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
@@ -38,11 +39,7 @@ export default function Home() {
       setContent({
         title: "",
         url: "",
-        explanation:
-          error.response?.data?.msg ||
-          error.response?.data?.error?.message ||
-          error.message ||
-          "Valami hiba történt",
+        explanation: getAPImessage(error),
       });
       return;
     }

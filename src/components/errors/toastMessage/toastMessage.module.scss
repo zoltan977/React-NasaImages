@@ -1,0 +1,15 @@
+.ToastMessage {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  p {
+    font-size: 20px;
+    color: black;
+
+    &:first-child {
+      color: red;
+      font-size: 25px;
+    }
+  }
+}
