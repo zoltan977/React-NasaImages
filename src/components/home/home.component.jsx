@@ -4,7 +4,7 @@ import classnames from "classnames";
 import env from "react-dotenv";
 import React, { useState, useEffect } from "react";
 import httpClient from "../../utils/httpClient";
-import ContentCard from "../shared/content-card/content-card.component";
+import ContentCard from "../shared/contentCard/contentCard.component";
 import getAPImessage from "../../utils/getAPImessage";
 
 export default function Home() {

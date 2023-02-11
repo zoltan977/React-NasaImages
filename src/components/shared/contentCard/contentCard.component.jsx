@@ -1,4 +1,4 @@
-import styles from "./content-card.module.scss";
+import styles from "./contentCard.module.scss";
 import classnames from "classnames";
 import React, { useState } from "react";
 import Content from "../content/content.component";
