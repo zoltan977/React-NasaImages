@@ -4,12 +4,25 @@
   gap: 10px;
 
   p {
-    font-size: 20px;
+    font-size: 12px;
     color: black;
 
     &:first-child {
       color: red;
-      font-size: 25px;
+      font-size: 16px;
+      line-height: 0.8;
+    }
+
+    $start: 500px;
+    $step: 250px;
+    @for $i from 0 through 15 {
+      @media screen and (min-width: (($start + 1px) + $i * $step)) and (max-width: (($start + $step) + $i * $step)) {
+        font-size: (15px + $i * 3px);
+
+        &:first-child {
+          font-size: (20px + $i * 4px);
+        }
+      }
     }
   }
 }

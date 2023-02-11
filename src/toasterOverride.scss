@@ -1,0 +1,20 @@
+$start: 500px;
+$step: 250px;
+@for $i from 0 through 15 {
+  @media screen and (min-width: (($start + 1px) + $i * $step)) and (max-width: (($start + $step) + $i * $step)) {
+    .Toastify__toast-icon {
+      width: (30px + $i * 6px);
+    }
+    .Toastify__toast-container {
+      width: (320px + $i * 60px);
+    }
+    .Toastify__close-button > svg {
+      width: (18px + $i * 4px);
+      height: (20px + $i * 4px);
+    }
+    .Toastify__toast-body {
+      gap: (7px + $i * 1px);
+      padding: (7px + $i * 1px);
+    }
+  }
+}

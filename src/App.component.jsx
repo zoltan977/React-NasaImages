@@ -1,3 +1,5 @@
+import "react-toastify/dist/ReactToastify.css";
+import "./toasterOverride.scss";
 import styles from "./App.module.scss";
 import React from "react";
 import {
@@ -11,7 +13,6 @@ import Gallery from "./components/gallery/gallery.component.jsx";
 import ErrorBoundary from "./components/errors/errorBoundary/errorBoundary.component";
 import Navbar from "./components/navbar/navbar.component";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
