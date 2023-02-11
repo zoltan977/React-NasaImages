@@ -2,10 +2,11 @@ import "animate.css/animate.min.css";
 import styles from "./home.module.scss";
 import classnames from "classnames";
 import env from "react-dotenv";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import httpClient from "../../utils/httpClient";
 import ContentCard from "../shared/contentCard/contentCard.component";
 import getAPImessage from "../../utils/getAPImessage";
+import {Resizable} from 're-resizable';
 
 export default function Home() {
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
@@ -13,12 +14,15 @@ export default function Home() {
   const [animationState, setAnimationState] = useState("");
   const [animateLeft, setAnimateLeft] = useState(true);
 
+  const resizableRef = useRef();
+
   const onAnimationEnd = (e) => {
     if (e.animationName.includes("Out")) {
       setAnimationState("flyIn");
     } else {
       setAnimationState("");
     }
+    resizableRef.current.updateSize({width: '70vw', height: 'auto'})
   };
 
   const callAPI = async () => {
@@ -110,7 +114,7 @@ export default function Home() {
       </div>
       <div className={styles.content}>
         <span onClick={() => increaseDecreaseDate()}>{"\u21e6"}</span>
-        <div
+        <Resizable ref={resizableRef}
           className={classnames(styles.cardContainer, {
             ["animate__animated"]: animationState,
             ["animate__faster"]: animationState,
@@ -122,7 +126,7 @@ export default function Home() {
           onAnimationEnd={onAnimationEnd}
         >
           <ContentCard data={content}></ContentCard>
-        </div>
+        </Resizable>
         <span onClick={() => increaseDecreaseDate(true)}>{"\u21e8"}</span>
       </div>
     </div>

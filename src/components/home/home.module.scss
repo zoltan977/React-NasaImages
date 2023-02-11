@@ -59,8 +59,8 @@
 
   .cardContainer {
     margin: 0 auto;
-    width: 70vw;
     box-shadow: 0 1vw 2.5vw black;
     background-color: white;
+    overflow: hidden;
   }
 }
