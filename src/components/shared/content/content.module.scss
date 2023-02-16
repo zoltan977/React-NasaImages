@@ -8,10 +8,12 @@
     object-fit: cover;
   }
   iframe {
+    pointer-events: none;
+    
     &.isClickable {
       pointer-events: all;
+      min-height: 50vh;
     }
-    pointer-events: none;
   }
   img {
     cursor: all-scroll;

@@ -1,4 +1,4 @@
-## Images of NASA
+## NASA images
 
 ReactJS application that uses the NASA APOD (Astronomy Picture of the Day) API to display the picture or video and its explanation which belongs to a selected date. It can show random topics(images and explanations) as well.
 
@@ -6,21 +6,17 @@ ReactJS application that uses the NASA APOD (Astronomy Picture of the Day) API t
 
 - There are two pages in the application
 - On the first page you can select a date from the drop-down menu
-- Upon selection the image which belongs to the selected date and its explanation is showed
+- The image which belongs to the selected date and (by clicking the title) its explanation appears.
 - On the second page random images or videos are displayed.
-- Upon clicking on these random images they are displayed in a pop-up window with their explanation below them
+- Upon clicking on these random images they are displayed in a pop-up window and (by clicking the title) their explanations are also showed.
 
-Images of NASA uses the following tech-stack:
+Tech-stack:
 
 - [ReactJs](https://reactjs.org/) - A JavaScript library for building user interfaces
 
-## Demo
-
-The runing app can be tested on this [demo](https://zoltan977.github.io/) link.
-
 ## Installation
 
-Images of NASA requires [Node.js](https://nodejs.org/) v14+ to run.
+Requires [Node.js](https://nodejs.org/) v14+ to run.
 
 Install the dependencies and devDependencies.
 Open your favorite Terminal and run these commands.
