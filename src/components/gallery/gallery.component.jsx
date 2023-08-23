@@ -25,7 +25,7 @@ export default function Gallery() {
       let json;
       try {
         setLoading(true);
-        const response = await httpClient(`?count=9&api_key=${env.API_KEY}`);
+        const response = await httpClient(`apod?count=9&api_key=${env.API_KEY}`);
 
         json = response.data;
         setLoading(false);

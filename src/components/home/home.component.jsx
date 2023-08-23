@@ -32,7 +32,7 @@ export default function Home() {
     let json;
     try {
       const response = await httpClient.get(
-        `?date=${date}&api_key=${env.API_KEY}`
+        `apod?date=${date}&api_key=${env.API_KEY}`
       );
 
       console.log("response: ", response);
