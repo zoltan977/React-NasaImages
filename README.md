@@ -10,10 +10,13 @@ ReactJS application that uses the NASA APOD (Astronomy Picture of the Day) API t
 - On the second page random images or videos are displayed.
 - Upon clicking on these random images they are displayed in a pop-up window and (by clicking the title) their explanations are also showed.
 
-Tech-stack:
+## Tech-stack:
 
 - [ReactJs](https://reactjs.org/) - A JavaScript library for building user interfaces
 
+## Demo
+
+You can test the running upplication on this [demo](https://nasa-images-3dpo.onrender.com) link.
 ## Installation
 
 Requires [Node.js](https://nodejs.org/) v14+ to run.
