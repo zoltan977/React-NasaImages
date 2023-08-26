@@ -16,7 +16,7 @@ ReactJS application that uses the NASA APOD (Astronomy Picture of the Day) API t
 
 ## Demo
 
-You can test the running application on this [demo](https://nasa-images-3dpo.onrender.com) link.
+You can test the running application on this [demo](https://nasa-images-3dpo.onrender.com) link.(It may takes a few minutes to start...)
 ## Installation
 
 Requires [Node.js](https://nodejs.org/) v14+ to run.
